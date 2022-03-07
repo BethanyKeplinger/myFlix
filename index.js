@@ -1,17 +1,17 @@
 //express framework
 const express = require("express"),
-  //morgan = require('morgan');
-  uuid = require("uuid"),
-  bodyParser = require("body-parser");
+  morgan = require("morgan");
+(uuid = require("uuid")), (bodyParser = require("body-parser"));
 
 const app = express();
 
 //function to invoke middleware function -commcon format logs time requests etc
-//app.use(morgan('common'));
+app.use(morgan("common"));
 
 //function routes requests for static files to public folder
-//app.use(express.static('public'));
+app.use(express.static("public"));
 
+//reads tbe data out of the request body
 app.use(bodyParser.json());
 
 let users = [
@@ -19,6 +19,11 @@ let users = [
     id: 1,
     name: "Joanna",
     favoriteMovies: []
+  },
+  {
+    id: 2,
+    name: "Julie",
+    favoriteMovies: "The Goofy Movie"
   }
 ];
 
@@ -39,10 +44,6 @@ let movies = [
       Birth: "October 31 1961"
     },
     ImageURL: ""
-  },
-
-  {
-    Title: "Hold Please"
   }
 ];
 
