@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const uuid = require("uuid");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const Models = require(".models/js");
+const Models = require("./models.js");
 
 //requiring mongoose models
 const Movies = Models.Movie;
@@ -53,7 +53,31 @@ app.post("/users", (req, res) => {
     })
     .catch(error => {
       console.error(error);
-      res.status(500).send("Error" + error);
+      res.status(500).send("Error:" + error);
+    });
+});
+
+//Read data about users
+app.get("/users", (req, res) => {
+  Users.find()
+    .then(users => {
+      res.status(201).json(users);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error:" + err);
+    });
+});
+
+//Get user by username
+app.get("/users/:Username", (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error:" + err);
     });
 });
 
