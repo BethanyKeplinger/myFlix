@@ -1,8 +1,10 @@
 //express framework
-const express = require("express");
+const express = require("express"),
+  bodyParser = require("body-parser"),
+  uuid = require("uuid");
+
 const morgan = require("morgan");
-const uuid = require("uuid");
-const bodyParser = require("body-parser");
+const app = express();
 const mongoose = require("mongoose");
 const Models = require("./models.js");
 
@@ -15,8 +17,6 @@ mongoose.connect("mongodb://localhost:27017/myFlixDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
-const app = express();
 
 //reads tbe data out of the request body
 app.use(bodyParser.json());
@@ -143,8 +143,8 @@ app.delete("/users/:Username/movies/:MovieID", (req, res) => {
   );
 });
 
-//DELETE user by user id
-app.delete("/users/:Username/", (req, res) => {
+//DELETE user by user id- NEW
+app.delete("/users/:Username", (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then(user => {
       if (!user) {
@@ -159,26 +159,33 @@ app.delete("/users/:Username/", (req, res) => {
     });
 });
 
-//READ requests- app.METHOD(PATH, HANDLER)
+//READ requests- app.METHOD(PATH, HANDLER)- GOOD
 app.get("/", (req, res) => {
-  res.send("Here are my top ten favorite movies");
+  res.send("Welcome to MyFlix");
 });
 
-//READ list of movies
+//READ list of movies - NEW
 app.get("/movies", (req, res) => {
-  res.status(200).json(movies);
+  Movies.find()
+    .then(movies => {
+      res.status(201).json(movies);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error:" + err);
+    });
 });
 
 //READ find movie by title
-app.get("/movies/:title", (req, res) => {
-  const { title } = req.params;
-  const movie = movies.find(movie => movie.Title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(400).send("no such movie");
-  }
+app.get("/movies/:Title", (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
+    .then(movie => {
+      res.json(movie);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error:" + err);
+    });
 });
 
 //READ find movie by genre
