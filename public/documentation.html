@@ -35,6 +35,83 @@
       </thead>
       <thbody>
         <tr>
+          <td>Allows new users to register</td>
+          <td>"/users"</td>
+          <td>POST</td>
+          <td>none</td>
+          <td>
+            A JSON object holding data about new user that was added <br />
+            Example: { ID: id number, Username: "testusername", Password:
+            "testpassword", Email: "testemail", Birthday: "01/01/11"}
+          </td>
+          <td>
+            A JSON object is requested <br />
+            Example:{ ID: id number, Username: "testusername", Password:
+            "testpassword", Email: "testemail", Birthday: "01/01/11"}
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Gets user information by username
+          </td>
+          <td>"/user/:Username"</td>
+          <td>GET</td>
+          <td>:Username</td>
+          <td>none</td>
+          <td>
+            A JSON object holding data about a user <br />
+            Example: ID: id number, Username: "testusername", Password:
+            "testpassword", Email: "testemail", Birthday: "01/01/11"} ,
+          </td>
+        </tr>
+
+        <tr>
+          <td>Allows users to update their user info</td>
+          <td>"/users/:Username"</td>
+          <td>PUT</td>
+          <td>:Username</td>
+          <td>A JSON object holding data about a user to change data</td>
+          <td>
+            A JSON object holding data about the updated user information<br />
+            Example: "Username": "testusername", "Password":
+            "testpassword","Email" : "testemail@gmail.com"
+          </td>
+        </tr>
+
+        <tr>
+          <td>Allows users to add a movie to their list of favorites</td>
+          <td>"/users/:Username/movies/:MovieID"</td>
+          <td>POST</td>
+          <td>:Username,:MovieID</td>
+          <td>none</td>
+          <td>
+            A JSON object holding data about the updated list of favorite
+            movies/td>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Allows users to remove a movie from their list of favorites</td>
+          <td>"/users/:Username//movies/:MovieID"</td>
+          <td>DELETE</td>
+          <td>:Username,:MovieID</td>
+          <td>none</td>
+          <td>
+            A JSON object holding data about the updatd list of favorite movies
+          </td>
+        </tr>
+
+        <tr>
+          <td>Allows existing users to deregister</td>
+          <td>"/users/:username"</td>
+          <td>DELETE</td>
+          <td>:username</td>
+          <td>none</td>
+          <td>A text message indicating that the user has been deleted</td>
+        </tr>
+
+        <tr>
           <td>Returns a list of all movies to the user</td>
           <td>"/movies"</td>
           <td>GET</td>
@@ -44,27 +121,28 @@
             A JSON object holding data about all the movies <br />
             Example: {Title: "The Lord of the Rings", Description: "", Genre: {
             Name: "Fantasy", Description:""} Director: { Name: "Peter Jackson",
-            Bio: "", Birth Year-Death Year } }
+            Bio: "", Birth Year-Death Year } ImagePath: "", Featured: "" }
           </td>
         </tr>
 
         <tr>
           <td>Returns data about a single movie by title to the user</td>
-          <td>"/movies/:title"</td>
+          <td>"/movies/:Title"</td>
           <td>GET</td>
           <td>:title</td>
           <td>none</td>
           <td>
             A JSON object holding data about a single movie <br />
-            Example: {Title: "The Lord of the Rings", Description: ""}
+            Example: {Title: "The Lord of the Rings", Description: "", Director:
+            {Name: "", Bio: "", Birthyear: "", ImagePath: "", Featured: ""}
           </td>
         </tr>
 
         <tr>
           <td>Returns data about a genre by name</td>
-          <td>"/movies/genre/:genreName"</td>
+          <td>"/movies/genre/:Name"</td>
           <td>GET</td>
-          <td>:genreName</td>
+          <td>:Name</td>
           <td>none</td>
           <td>
             A JSON object holding data about a genre <br />
@@ -76,68 +154,15 @@
           <td>
             Returns data about a director(bio, birth year, death year) by name
           </td>
-          <td>"/movies/director/:directorName"</td>
+          <td>"/movies/director/:Name"</td>
           <td>GET</td>
-          <td>:directorName</td>
+          <td>:Name</td>
           <td>none</td>
           <td>
             A JSON object holding data about a director <br />
             Example: Director: { Name: "Peter Jackson", Bio: "", Birth Year: "",
             Death Year: "" },
           </td>
-        </tr>
-
-        <tr>
-          <td>Allows new users to register</td>
-          <td>"/users"</td>
-          <td>POST</td>
-          <td>none</td>
-          <td>
-            A JSON object holding data about new user that was added <br />
-            Example: { ID: id number, Name: "", FavoriteMovies: []}
-          </td>
-          <td>
-            A JSON object is requested <br />
-            Example: { ID: "12345", Name: "John Doe", FavoriteMovies: []}
-          </td>
-        </tr>
-
-        <tr>
-          <td>Allows users to update their user info</td>
-          <td>"/users/:username"</td>
-          <td>PUT</td>
-          <td>:username</td>
-          <td>A JSON object holding data about a user to change data</td>
-          <td>A JSON object holding data about the updated user information</td>
-        </tr>
-
-        <tr>
-          <td>Allows users to add a movie to their list of favorites</td>
-          <td>"/users/:username/movies/:movieID"</td>
-          <td>POST</td>
-          <td>:username,:movieID</td>
-          <td>none</td>
-          <td>A message indicating whether the movie was successfully added</td>
-        </tr>
-
-        <tr>
-          <td>Allows users to remove a movie from their list of favorites</td>
-          <td>"/users/:username//movies/:movieID"</td>
-          <td>DELETE</td>
-          <td>:username,:movieID</td>
-          <td>none</td>
-          <td>
-            A message indicating whether the movie was successfully removed
-          </td>
-        </tr>
-
-        <tr>
-          <td>Allows existing users to deregister</td>
-          <td>"/users/:username"</td>
-          <td>DELETE</td>
-          <td>:username</td>
-          <td>none</td>
-          <td>A text message indicating that the user has been deleted</td>
         </tr>
       </thbody>
     </table>
