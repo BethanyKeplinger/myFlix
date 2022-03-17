@@ -176,7 +176,7 @@ app.get("/movies", (req, res) => {
     });
 });
 
-//READ find movie by title
+//READ find movie by title- NEW
 app.get("/movies/:Title", (req, res) => {
   Movies.findOne({ Title: req.params.Title })
     .then(movie => {
@@ -188,29 +188,36 @@ app.get("/movies/:Title", (req, res) => {
     });
 });
 
-//READ find movie by genre
-app.get("/movies/genre/:genreName", (req, res) => {
-  const { genreName } = req.params;
-  const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
-
-  if (genre) {
-    res.status(200).json(genre);
-  } else {
-    res.status(400).send("no such genre");
-  }
+//READ find movie by genre NEW
+app.get("movies/genre/:Name", (req, res) => {
+  Movies.findOne({ "Genre.Name": req.params.Name })
+    .then(movie => {
+      if (movie) {
+        res.status(200).json(movie.Genre);
+      } else {
+        res.status(400).send("Genre not found.");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error:" + err);
+    });
 });
 
-//READ find movie by director
-app.get("/movies/director/:directorName", (req, res) => {
-  const { directorName } = req.params;
-  const director = movies.find(movie => movie.Director.Name === directorName)
-    .Director;
-
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send("no such director");
-  }
+//READ find movie by director NEW
+app.get("/movies/director/:Name", (req, res) => {
+  Movies.findOne({ "Director.Name": req.params.Name })
+    .then(movie => {
+      if (movie) {
+        res.status(200).json(movie.Director);
+      } else {
+        res.status(400).send("Director not found.");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send("Error:" + err);
+    });
 });
 
 //Error handling middleware function
