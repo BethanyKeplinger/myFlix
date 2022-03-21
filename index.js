@@ -8,6 +8,8 @@ const app = express();
 const mongoose = require("mongoose");
 const Models = require("./models.js");
 
+const { check, validationResult } = require("express-validator");
+
 //requiring mongoose models
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -28,6 +30,9 @@ app.use(morgan("common"));
 //function routes requests for static files to public folder
 app.use(express.static("public"));
 
+const cors = require("cors");
+app.use(cors());
+
 let auth = require("./auth")(app); //import auth.js. app ensures Express is available to auth as well
 
 //require passport module and import passport.js
@@ -37,8 +42,26 @@ require("./passport");
 //CREATE new user- NEW
 app.post(
   "/users",
-  passport.authenticate("jwt", { session: false }),
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required")
+      .not()
+      .isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail()
+  ],
   (req, res) => {
+    //check the validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
 
       .then(user => {
@@ -47,7 +70,7 @@ app.post(
         } else {
           Users.create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
