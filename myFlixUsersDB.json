@@ -1,0 +1,2 @@
+{"_id":{"$oid":"622bb434268c963231b6de7d"},"Username":"SamSmith812","Password":"123456789","Email":"samsmith@gmail.com","Birthday":{"$date":"2006-08-12T00:00:00Z"},"Favorite Movies":{"$oid":"622ba7dc268c963231b6de7c"}}
+{"_id":{"$oid":"622bb4bf268c963231b6de7e"},"Username":"JoannaJones","Password":"Abcdefg","Email":"JJ1989@gmail.com","Birthday":{"$date":"1989-02-22T00:00:00Z"},"Favorite Movies":{"$oid":"622b87e0268c963231b6de73"},"FavoriteMovies":[{"$oid":"622ba0c2268c963231b6de7a"}]}
