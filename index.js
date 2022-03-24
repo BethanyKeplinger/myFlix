@@ -266,7 +266,7 @@ app.get(
     Movies.findOne({ "Genre.Name": req.params.Name })
       .then(movie => {
         if (movie) {
-          res.status(201).json(movie.Genre.Name.Description);
+          res.status(201).json(movie.Genre.Name);
         } else {
           res.status(400).send("Genre not found.");
         }
