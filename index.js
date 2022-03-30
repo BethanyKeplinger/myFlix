@@ -229,7 +229,7 @@ app.get("/", (req, res) => {
 //READ list of movies - NEW
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then(movies => {
