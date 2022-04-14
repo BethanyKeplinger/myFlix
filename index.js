@@ -20,6 +20,7 @@ const Users = Models.User;
 //  useUnifiedTopology: true
 //});
 
+//allows url to connect to database 
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -229,7 +230,7 @@ app.get("/", (req, res) => {
 //READ list of movies - NEW
 app.get(
   "/movies",
-  //passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then(movies => {
