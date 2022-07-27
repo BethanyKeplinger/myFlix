@@ -45,7 +45,9 @@ let auth = require("./auth")(app); //import auth.js. app ensures Express is avai
 const passport = require("passport");
 require("./passport");
 
-//CREATE new user- NEW
+//Start of Endpoint definitions
+
+//CREATE new user
 app.post(
   "/users",
   [
@@ -96,7 +98,7 @@ app.post(
   }
 );
 
-//Read data about users- NEW
+//Read data about users
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -112,7 +114,7 @@ app.get(
   }
 );
 
-//Get user by username -NEW
+//Get user by username
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -128,7 +130,7 @@ app.get(
   }
 );
 
-//UPDATE user information- NEW
+//UPDATE user information
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -156,7 +158,7 @@ app.put(
   }
 );
 
-//CREATE add movie to users favorite movies list - NEW
+//CREATE add movie to users favorite movies list
 app.post(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -179,7 +181,7 @@ app.post(
   }
 );
 
-//DELETE movie from users favorite movie list - NEW
+//DELETE movie from users favorite movie list
 app.delete(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -202,7 +204,7 @@ app.delete(
   }
 );
 
-//DELETE user by user id- NEW
+//DELETE user by user id
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -222,7 +224,7 @@ app.delete(
   }
 );
 
-//READ requests- app.METHOD(PATH, HANDLER)- GOOD
+//READ requests- app.METHOD(PATH, HANDLER)
 app.get("/", (req, res) => {
   res.send("Welcome to MyFlix");
 });
@@ -243,7 +245,7 @@ app.get(
   }
 );
 
-//READ find movie by title- NEW
+//READ find movie by title
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -259,7 +261,7 @@ app.get(
   }
 );
 
-//READ find movie by genre NEW
+//READ find movie by genre
 app.get(
   "/movies/genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -279,7 +281,7 @@ app.get(
   }
 );
 
-//READ find movie by director NEW
+//READ find movie by director
 app.get(
   "/movies/director/:Name",
   passport.authenticate("jwt", { session: false }),
