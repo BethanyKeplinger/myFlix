@@ -8,6 +8,8 @@ Other packages that were used are bcrypt, body-parser, cors, express-validator, 
 <h2>API Reference</h2>
 Click here for full reference page https://github.com/BethanyKeplinger/myFlix/blob/main/public/documentation.html
 
+<h2>Endpoints</h2>
+
 <h3>Login</h3>
 Login with user information and return token
 <strong>URL: </strong> /login <br>
@@ -39,7 +41,7 @@ Birthday: "01/01/11"}<br>
     
    
 
-<h3>Users</h3>
+<h3>Get user by Username</h3>
 <strong>URL: /user/:Username </strong>  <br>
 <strong>Method: </strong> GET<br>
 <strong>Body: </strong> none <br>
@@ -47,8 +49,7 @@ Birthday: "01/01/11"}<br>
 Example: ID: id number, Username: "testusername", Password: "testpassword", Email: "testemail", Birthday: "01/01/11"} <br> <br>
 
 
-<h3>Users</h3>
-Allows users to update their user info <br>
+<h3>Update User information</h3>
 <strong>URL: </strong> /users/:Username<br>
 <strong>Method: </strong> PUT <br>
 <strong>Body: </strong> <br>
@@ -58,8 +59,7 @@ A JSON object holding data about the updated user information
 Example: "Username": "testusername", "Password": "testpassword","Email" : "testemail@gmail.com" <br> <br>
 
 
-<h3>Users</h3>
-Allows users to add a movie to their list of favorites<br>
+<h3>Add movie to favorites</h3>
 <strong>URL: </strong> /users/:Username/movies/:MovieID <br>
 <strong>Method: </strong> POST<br>
 <strong>Body: </strong> none <br>
@@ -67,8 +67,7 @@ Allows users to add a movie to their list of favorites<br>
 A JSON object holding data about the updated list of favorite movies<br><br>
 
 
-<h3>Users</h3>
-Allows users to remove a movie from their list of favorites
+<h3>Remove movie from favorites</h3>
 <strong>URL: </strong> /users/:Username//movies/:MovieID<br>
 <strong>Method: </strong> DELETE<br>
 <strong>Body: </strong> none <br>
@@ -77,8 +76,7 @@ A JSON object holding data about the updatd list of favorite movies<br><br>
 
 
 
-<h3>Users</h3>
-Allows existing users to deregister
+<h3>Delete user by Username</h3>
 <strong>URL: </strong> /users/:username<br>
 <strong>Method: </strong> DELETE <br>
 <strong>Body: </strong> none<br>
@@ -87,8 +85,7 @@ A text message indicating that the user has been deleted<br><br>
 
 
 
-<h3>Movies</h3>
-Returns a list of all movies to the user
+<h3>Gets a list of all movies</h3>
 <strong>URL: </strong> /movies<br>
 <strong>Method: </strong> GET <br>
 <strong>Body: </strong> none <br>
@@ -98,8 +95,7 @@ Example: {Title: "The Lord of the Rings", Description: "", Genre: { Name: "Fanta
 
 
 
-<h3>Movies</h3>
-Returns data about a single movie by title to the user
+<h3>Gets data about a single movie by title</h3>
 <strong>URL: </strong> /movies/:Title<br>
 <strong>Method: </strong> GET <br>
 <strong>Body: </strong> none <br>
@@ -108,8 +104,7 @@ A JSON object holding data about a single movie
 Example: {Title: "The Lord of the Rings", Description: "", Director: {Name: "", Bio: "", Birthyear: "", ImagePath: "", Featured: ""} <br><br>
 
 
-<h3>Movies</h3>
-Returns data about a genre by name
+<h3>Gets data about a genre by name</h3>
 <strong>URL: </strong> /movies/genre/:Name<br>
 <strong>Method: </strong> GET <br>
 <strong>Body: </strong> none <br>
@@ -118,8 +113,7 @@ A JSON object holding data about a genre
 Example: Genre: { Name: "Fantasy", Description: ""}<br><br>
 
 
-<h3>Movies</h3>
-Returns data about a director(bio, birth year, death year) by name
+<h3>Gets data about a director by name</h3>
 <strong>URL: </strong> /movies/director/:Name<br>
 <strong>Method: </strong> GET <br>
 <strong>Body: </strong> none <br>
